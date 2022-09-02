@@ -23,7 +23,7 @@ chatQueue = []
 
 stopProcess = False
 
-@teletips.on_message(filters.command(["ping","all"]))
+@teletips.on_message(filters.command(["mentionall","all"]))
 async def everyone(client, message):
   global stopProcess
   try: 
@@ -34,10 +34,10 @@ async def everyone(client, message):
       has_permissions = message.sender_chat  
     if has_permissions:
       if len(chatQueue) > 5:
-        await message.reply("⛔️ | I'm already working on my maximum number of 5 chats at the moment. Please try again shortly.")
+        await message.reply("I'm already working on my maximum number of 5 chats at the moment. Please try again shortly.")
       else:  
         if message.chat.id in chatQueue:
-          await message.reply("🚫 | There's already an ongoing process in this chat. Please /stop to start a new one.")
+          await message.reply("There's already an ongoing process in this chat. Please /stop to start a new one.")
         else:  
           chatQueue.append(message.chat.id)
           if len(message.command) > 1:
@@ -80,9 +80,9 @@ async def everyone(client, message):
                 pass  
               i = i+j
           if i == lenMembersList:    
-            await message.reply(f"✅ | Successfully mentioned **total number of {i} members**.\n❌ | Bots and deleted accounts were rejected.") 
+            await message.reply(f"✅ | Successfully mentioned **total number of {i} members**") 
           else:
-            await message.reply(f"✅ | Successfully mentioned **{i} members.**\n❌ | Bots and deleted accounts were rejected.")    
+            await message.reply(f"✅ | Successfully mentioned **{i} members.**")    
           chatQueue.remove(message.chat.id)
     else:
       await message.reply("👮🏻 | Sorry, **only admins** can execute this command.")  
